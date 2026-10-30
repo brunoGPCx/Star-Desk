@@ -167,31 +167,31 @@ class ColorThemeExtension extends ThemeExtension<ColorThemeExtension> {
   final Color? divider;
 
   static final light = ColorThemeExtension(
-    border: Color(0xFFCCCCCC),
-    border2: Color(0xFFBBBBBB),
+    border: Color(0xFFE4E4E7),
+    border2: Color(0xFFD4D4D8),
     border3: Colors.black26,
-    highlight: Color(0xFFE5E5E5),
+    highlight: Color(0xFFF0F0F2),
     drag_indicator: Colors.grey[800],
     shadow: Colors.black,
     errorBannerBg: Color(0xFFFDEEEB),
     me: Colors.green,
-    toastBg: Colors.black.withOpacity(0.6),
+    toastBg: Color(0xEE0A0A0A),
     toastText: Colors.white,
-    divider: Colors.black38,
+    divider: Color(0xFFE4E4E7),
   );
 
   static final dark = ColorThemeExtension(
-    border: Color(0xFF555555),
-    border2: Color(0xFFE5E5E5),
+    border: Color(0xFF27272A),
+    border2: Color(0xFF3F3F46),
     border3: Colors.white24,
     highlight: Color(0xFF27272A),
     drag_indicator: Colors.grey,
     shadow: Colors.grey,
     errorBannerBg: Color(0xFF3B1414),
     me: Colors.greenAccent,
-    toastBg: Colors.white.withOpacity(0.6),
+    toastBg: Color(0xEEFFFFFF),
     toastText: Colors.black,
-    divider: Colors.white38,
+    divider: Color(0xFF27272A),
   );
 
   @override
@@ -372,8 +372,10 @@ class MyTheme {
   static ThemeData lightTheme = ThemeData(
     // https://stackoverflow.com/questions/77537315/after-upgrading-to-flutter-3-16-the-app-bar-background-color-button-size-and
     useMaterial3: false,
+    fontFamily: 'Geist',
     brightness: Brightness.light,
-    hoverColor: Color.fromARGB(255, 224, 224, 224),
+    hoverColor: Color(0xFFF0F0F2),
+    dividerColor: Color(0xFFE4E4E7),
     scaffoldBackgroundColor: Colors.white,
     dialogBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
@@ -382,21 +384,30 @@ class MyTheme {
     dialogTheme: DialogTheme(
       elevation: 15,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
+        borderRadius: BorderRadius.circular(14.0),
         side: BorderSide(
           width: 1,
-          color: grayBg,
+          color: Color(0xFFE4E4E7),
         ),
       ),
     ),
     scrollbarTheme: scrollbarTheme,
     inputDecorationTheme: isDesktop
         ? InputDecorationTheme(
-            fillColor: grayBg,
+            fillColor: Colors.white,
             filled: true,
             isDense: true,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFFE4E4E7)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFFE4E4E7)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFF0A0A0A), width: 1.5),
             ),
           )
         : null,
@@ -472,7 +483,9 @@ class MyTheme {
   );
   static ThemeData darkTheme = ThemeData(
     useMaterial3: false,
+    fontFamily: 'Geist',
     brightness: Brightness.dark,
+    dividerColor: Color(0xFF27272A),
     hoverColor: Color(0xFF1F1F23),
     scaffoldBackgroundColor: Color(0xFF0A0A0A),
     dialogBackgroundColor: Color(0xFF111113),
@@ -482,21 +495,30 @@ class MyTheme {
     dialogTheme: DialogTheme(
       elevation: 15,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
+        borderRadius: BorderRadius.circular(14.0),
         side: BorderSide(
           width: 1,
-          color: Color(0xFF18181B),
+          color: Color(0xFF27272A),
         ),
       ),
     ),
     scrollbarTheme: scrollbarThemeDark,
     inputDecorationTheme: (isDesktop || isWebDesktop)
         ? InputDecorationTheme(
-            fillColor: Color(0xFF18181B),
+            fillColor: Color(0xFF111113),
             filled: true,
             isDense: true,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFF27272A)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFF27272A)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.white, width: 1.5),
             ),
           )
         : null,
@@ -563,7 +585,7 @@ class MyTheme {
         style: MenuStyle(
             backgroundColor: MaterialStatePropertyAll(Color(0xFF121212)))),
     colorScheme: ColorScheme.dark(
-      primary: Colors.blue,
+      primary: Colors.white,
       secondary: accent,
       background: Color(0xFF18181B),
     ),

@@ -162,8 +162,33 @@ class _InstallPageBodyState extends State<_InstallPageBody>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(translate('Installation'),
-                  style: Theme.of(context).textTheme.headlineMedium),
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: loadIcon(40),
+                  ),
+                  const SizedBox(width: 14),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Instalar o Star Desk',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.4)),
+                      Text('Acesso remoto da Star Aduana',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.color
+                                  ?.withOpacity(0.55))),
+                    ],
+                  ),
+                ],
+              ).marginOnly(top: 8),
               Row(
                 children: [
                   Text('${translate('Installation Path')}:')
@@ -196,10 +221,13 @@ class _InstallPageBodyState extends State<_InstallPageBody>
                   padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: isDarkTheme
-                        ? Color.fromARGB(135, 87, 87, 90)
-                        : Colors.grey[100],
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey),
+                        ? const Color(0xFF18181B)
+                        : const Color(0xFFF4F4F5),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                        color: isDarkTheme
+                            ? const Color(0xFF27272A)
+                            : const Color(0xFFE4E4E7)),
                   ),
                   child: Row(
                     children: [

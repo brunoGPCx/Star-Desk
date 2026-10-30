@@ -310,9 +310,9 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
       translate('Settings'),
       textAlign: TextAlign.left,
       style: const TextStyle(
-        color: _accentColor,
         fontSize: _kTitleFontSize,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
+        letterSpacing: -0.3,
       ),
     );
     return Row(
@@ -355,10 +355,23 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
   Widget _listItem({required _TabInfo tab}) {
     return Obx(() {
       bool selected = tab.key == selectedTab.value;
-      return SizedBox(
+      final isDark = Theme.of(context).brightness == Brightness.dark;
+      final selectedBg = isDark ? const Color(0xFF1F1F23) : Colors.white;
+      final selectedFg = isDark ? Colors.white : const Color(0xFF0A0A0A);
+      return Container(
         width: _kTabWidth,
-        height: _kTabHeight,
+        height: _kTabHeight - 6,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        decoration: BoxDecoration(
+          color: selected ? selectedBg : null,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+              color: selected
+                  ? (isDark ? const Color(0xFF27272A) : const Color(0xFFE4E4E7))
+                  : Colors.transparent),
+        ),
         child: InkWell(
+          borderRadius: BorderRadius.circular(10),
           onTap: () {
             if (selectedTab.value != tab.key) {
               int index = DesktopSettingPage.tabKeys.indexOf(tab.key);
@@ -370,22 +383,20 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
             selectedTab.value = tab.key;
           },
           child: Row(children: [
-            Container(
-              width: 4,
-              height: _kTabHeight * 0.7,
-              color: selected ? _accentColor : null,
-            ),
             Icon(
               selected ? tab.selected : tab.unselected,
-              color: selected ? _accentColor : null,
-              size: 20,
-            ).marginOnly(left: 13, right: 10),
-            Text(
-              translate(tab.label),
-              style: TextStyle(
-                  color: selected ? _accentColor : null,
-                  fontWeight: FontWeight.w400,
-                  fontSize: _kContentFontSize),
+              color: selected ? selectedFg : selectedFg.withOpacity(0.55),
+              size: 19,
+            ).marginOnly(left: 12, right: 10),
+            Expanded(
+              child: Text(
+                translate(tab.label),
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: selected ? selectedFg : selectedFg.withOpacity(0.7),
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                    fontSize: _kContentFontSize),
+              ),
             ),
           ]),
         ),
@@ -2595,7 +2606,7 @@ class _AboutState extends State<_About> {
       final scrollController = ScrollController();
       return SingleChildScrollView(
         controller: scrollController,
-        child: _Card(title: translate('About RustDesk'), children: [
+        child: _Card(title: 'Sobre o Star Desk', children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -2625,14 +2636,16 @@ class _AboutState extends State<_About> {
                   ).marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com');
+                    launchUrlString('https://github.com/brunoGPCx/Star-Desk');
                   },
                   child: Text(
                     translate('Website'),
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
               Container(
-                decoration: const BoxDecoration(color: Color(0xFF2c8cff)),
+                decoration: BoxDecoration(
+                    color: const Color(0xFF0A0A0A),
+                    borderRadius: BorderRadius.circular(12)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                 child: SelectionArea(
@@ -2643,11 +2656,11 @@ class _AboutState extends State<_About> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Copyright © ${DateTime.now().toString().substring(0, 4)} Purslane Tech Pte. Ltd.\n$license',
+                            'Star Desk · Star Aduana\nBaseado no RustDesk, Copyright © ${DateTime.now().toString().substring(0, 4)} Purslane Tech Pte. Ltd. (AGPL-3.0)\n$license',
                             style: const TextStyle(color: Colors.white),
                           ),
                           Text(
-                            translate('Slogan_tip'),
+                            'Acesso remoto da Star Aduana.',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white),
